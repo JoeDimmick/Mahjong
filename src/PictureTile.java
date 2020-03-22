@@ -1,3 +1,5 @@
+import java.awt.*;
+
 abstract public class PictureTile extends Tile {
     private String name;
 
@@ -8,5 +10,10 @@ abstract public class PictureTile extends Tile {
     public String toString() {
         return name;
     }
+
+    public void paintComponent(Graphics g){
+        //TODO
+    }
+
 }
 

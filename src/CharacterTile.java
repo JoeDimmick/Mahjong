@@ -1,6 +1,8 @@
+import java.awt.*;
 import java.util.HashMap;
 
 public class CharacterTile extends Tile {
+
     private static HashMap<Character, String> labels = new HashMap<> ( );
     protected static HashMap<Character, String> EnglishToChinese = new HashMap<> ( );
     protected char symbol;
@@ -48,4 +50,9 @@ public class CharacterTile extends Tile {
     public String toChinese() {
         return EnglishToChinese.get ( symbol );
     }
+
+    public void paintComponent(Graphics g){
+        //TODO
+    }
+
 }
