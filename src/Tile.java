@@ -9,6 +9,10 @@ public class Tile extends JPanel {
     protected static Color c1;
     protected static Color c2;
     protected static Color c3;
+    protected static Color c4;
+    protected static GradientPaint gpRect;
+    protected static GradientPaint gpSide;
+    protected static GradientPaint gpBoarder;
 
     static{
         size = new Dimension(72,72);
@@ -20,13 +24,18 @@ public class Tile extends JPanel {
         int[] y = {0,6,66,66,60,60};
         int[] xBoarder = {6,0,0,60,66,6};
         int[] yBoarder = {6,12,72,72,66,66};
+
         c1 = new Color(0xffe4c4);
         c2 = new Color(0xfaf0e6);
-        c3 = new Color(0x228B22);
-
+        c3 = new Color(0x90EE90);
+        c4 = new Color(0x228B22);
 
         side = new Polygon(x,y,6);
         boarder = new Polygon(xBoarder,yBoarder,6);
+
+        gpRect = new GradientPaint(72,60, c2, 12, 0, c1);
+        gpSide = new GradientPaint(66,66,c2,6,66,c1);
+        gpBoarder = new GradientPaint(6,66,c3,6,6,c4);
     }
     public Tile(){
         setSize(size);
@@ -40,14 +49,14 @@ public class Tile extends JPanel {
     }
 
     public void paintComponent(Graphics g){
-        //TODO
+        
         super.paintComponent(g);
-        g.drawRect(12,0,60,60);
-        g.drawPolygon(side);
         Graphics2D graphics2D = (Graphics2D)g;
-        GradientPaint gradientPaint = new GradientPaint(12,60, c2, 72, 0, c1, true);
-        graphics2D.setPaint(gradientPaint);
-        graphics2D.setPaint(c3);
+        graphics2D.setPaint(gpRect);
+        g.fillRect(12,0,60,60);
+        graphics2D.setPaint(gpSide);
+        graphics2D.fillPolygon(side);
+        graphics2D.setPaint(gpBoarder);
         graphics2D.fillPolygon(boarder);
 
     }
