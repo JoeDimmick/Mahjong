@@ -13,6 +13,7 @@ public class Tile extends JPanel {
     protected static GradientPaint gpRect;
     protected static GradientPaint gpSide;
     protected static GradientPaint gpBoarder;
+    protected static Font font;
 
     static{
         size = new Dimension(72,72);
@@ -25,7 +26,7 @@ public class Tile extends JPanel {
         int[] xBoarder = {6,0,0,60,66,6};
         int[] yBoarder = {6,12,72,72,66,66};
 
-        c1 = new Color(0xffe4c4);
+        c1 = new Color(0xEED8AE);
         c2 = new Color(0xfaf0e6);
         c3 = new Color(0x90EE90);
         c4 = new Color(0x228B22);
@@ -49,7 +50,7 @@ public class Tile extends JPanel {
     }
 
     public void paintComponent(Graphics g){
-        
+
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D)g;
         graphics2D.setPaint(gpRect);
@@ -58,6 +59,11 @@ public class Tile extends JPanel {
         graphics2D.fillPolygon(side);
         graphics2D.setPaint(gpBoarder);
         graphics2D.fillPolygon(boarder);
+        g.setColor(Color.BLACK);
+        g.drawRect(12,0,60,60);
+        g.drawPolygon(side);
+        g.drawPolygon(boarder);
+        g.drawLine(12,60,0,72);
 
     }
 

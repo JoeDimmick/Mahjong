@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 
@@ -9,6 +10,7 @@ public class CharacterTile extends Tile {
 
     public CharacterTile(char symbol) {
         this.symbol = symbol;
+        setToolTipText(toString());
     }
 
     public boolean matches(Tile other) {
@@ -26,6 +28,7 @@ public class CharacterTile extends Tile {
         labels.put ( 'E', "East Wind" );
         labels.put ( 'W', "West Wind" );
         labels.put ( 'S', "South Wind" );
+        labels.put ( 'w', "Wan" );
         for (char c = '1'; c <= '9'; c++) labels.put ( c, "Character " + c );
     }
 
@@ -45,6 +48,7 @@ public class CharacterTile extends Tile {
         EnglishToChinese.put ( 'W', "\u897F" );
         EnglishToChinese.put ( 'C', "\u4E2D" );
         EnglishToChinese.put ( 'F', "\u767C" );
+        EnglishToChinese.put ( 'w', "\u842C" );
     }
 
     public String toChinese() {
@@ -52,7 +56,68 @@ public class CharacterTile extends Tile {
     }
 
     public void paintComponent(Graphics g){
-        //TODO
+
+        super.paintComponent(g);
+
+        g.setColor(Color.RED);
+        font = g.getFont();
+        g.setFont(font.deriveFont(10f));
+
+        g.drawString(String.valueOf(symbol), size.width-12, 12 );
+        if (symbol == 'C') {
+            g.setFont(font.deriveFont(40f));
+            g.drawString(EnglishToChinese.get(symbol), 22, 45);
+
+        } else if (String.valueOf(symbol).matches("[1-9]")) {
+            g.setFont(font.deriveFont(20f));
+            g.drawString(String.valueOf('\u842C'), size.width / 2, size.height - 25);
+            g.setColor(Color.BLACK);
+            g.drawString(EnglishToChinese.get(symbol), size.width / 2, 25);
+
+        } else if (symbol == 'F'){
+            g.setColor(c4);
+            g.setFont(font.deriveFont(40f));
+            g.drawString(EnglishToChinese.get(symbol), 22, 45);
+        } else {
+            g.setColor(Color.BLACK);
+            g.setFont(font.deriveFont(40f));
+            g.drawString(EnglishToChinese.get(symbol), 22, 45);
+        }
+
+    }
+
+    public static void main(String[] args)
+    {
+        JFrame		frame = new JFrame();
+        JPanel		tiles = new JPanel();
+        JScrollPane	scroller = new JScrollPane(tiles);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("Character Tiles");
+        frame.add(scroller);
+
+        // Try something like this if your tiles don't fit on the screen.
+        // Replace "tile width" and "tile height" with your values.
+        //scroller.setPreferredSize(new Dimension(8 * tile width, 40 + tile height));
+
+        tiles.add(new CharacterTile('1'));
+        tiles.add(new CharacterTile('2'));
+        tiles.add(new CharacterTile('3'));
+        tiles.add(new CharacterTile('4'));
+        tiles.add(new CharacterTile('5'));
+        tiles.add(new CharacterTile('6'));
+        tiles.add(new CharacterTile('7'));
+        tiles.add(new CharacterTile('8'));
+        tiles.add(new CharacterTile('9'));
+        tiles.add(new CharacterTile('N'));
+        tiles.add(new CharacterTile('E'));
+        tiles.add(new CharacterTile('W'));
+        tiles.add(new CharacterTile('S'));
+        tiles.add(new CharacterTile('C'));
+        tiles.add(new CharacterTile('F'));
+
+        frame.pack();
+        frame.setVisible(true);
     }
 
 }
