@@ -69,13 +69,13 @@ public class CharacterTile extends Tile {
             g.drawString(EnglishToChinese.get(symbol), 22, 45);
 
         } else if (String.valueOf(symbol).matches("[1-9]")) {
-            g.setFont(font.deriveFont(20f));
-            g.drawString(String.valueOf('\u842C'), size.width / 2, size.height - 25);
+            g.setFont(font.deriveFont(23f));
+            g.drawString(String.valueOf('\u842C'), (size.width-12) / 2, size.height - 20);
             g.setColor(Color.BLACK);
-            g.drawString(EnglishToChinese.get(symbol), size.width / 2, 25);
+            g.drawString(EnglishToChinese.get(symbol), (size.width-12) / 2, 25);
 
         } else if (symbol == 'F'){
-            g.setColor(c4);
+            g.setColor( drkGreen );
             g.setFont(font.deriveFont(40f));
             g.drawString(EnglishToChinese.get(symbol), 22, 45);
         } else {
