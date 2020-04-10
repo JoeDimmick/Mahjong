@@ -2,30 +2,29 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MahJong extends JFrame {
-
+    private static Dimension dim = new Dimension(960, 600);
     private MahJongBoard board;
 
+    //design the frame holding the game window here
     public  MahJong() {
         board = new MahJongBoard(this);
+        setPreferredSize(dim);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Dimmick Joseph MahJong");
-        setSize(700,700);
-        //setLocation();
+        setTitle("MahJong");
+
+        Dimension screenSize;
+        screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation((screenSize.width-dim.width)/2,(screenSize.height-dim.height)/2);
+
+        add(board);
+
+        pack();
+        setVisible(true);
     }
 
     public static void main(String[] args){
-        //JFrame frame = new JFrame();
-        MahJong frame = new MahJong();
-        frame.setLayout(new FlowLayout());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("MahJong");
-        frame.setSize(700,700);
-
-        //frame.add(new MahJongBoard(new MahJong()));
-
-        frame.pack();
-        frame.setVisible(true);
+        new MahJong();
     }
 
 }

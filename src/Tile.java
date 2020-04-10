@@ -40,6 +40,8 @@ public class Tile extends JPanel {
     public Tile(){
 
         setPreferredSize(size);
+        setSize(size);
+        setOpaque(false);
 
     }
 
