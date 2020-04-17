@@ -14,6 +14,9 @@ public class Tile extends JPanel {
     protected static GradientPaint gpSide;
     protected static GradientPaint gpBoarder;
     protected static Font font;
+    protected static int xPos;
+    protected static int yPos;
+    protected static int zPos;
 
     static{
 
@@ -69,6 +72,30 @@ public class Tile extends JPanel {
         g.drawPolygon(boarder);
         g.drawLine(12,60,0,72);
 
+    }
+
+    public void setXPos(int xPos){
+        this.xPos = xPos;
+    }
+
+    public void setYPos(int yPos){
+        this.yPos = yPos;
+    }
+
+    public void setZPos(int zPos){
+        this.zPos = zPos;
+    }
+
+    public int getXPos(){
+        return xPos;
+    }
+
+    public int getYPos(){
+        return yPos;
+    }
+
+    public int getZPos(){
+        return zPos;
     }
 
     public static void main(String[] args) {
