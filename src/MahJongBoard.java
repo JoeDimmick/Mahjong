@@ -20,8 +20,16 @@ public class MahJongBoard extends JPanel implements MouseListener  {
     //design the game window here
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
-        setLocation ( 576, 360 );
+        model.getTile(0,0,0);
+//        for(int i = 0; i < 8; i++){
+//            for(int j = 0; j < 14 ; j++){
+//                for(int k = 0; k < 3; k++){
+//                    model.getTile(i,j,k);
+//                }
+//            }
+//        }
+        //setLocation ( 576, 360 );
+        setBackground(Color.ORANGE);
     }
 
     @Override
