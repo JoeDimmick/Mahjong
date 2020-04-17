@@ -2,11 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+//set mouse listener call
 public class MahJongBoard extends JPanel implements MouseListener  {
 
     private MahJong game;
     private MahJongModel model;
+    //private ImageIcon backgroundImage = "";
 
 
     public MahJongBoard(MahJong game){

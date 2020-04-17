@@ -6,10 +6,9 @@ public class MahJongModel {
     TileDeck deck = new TileDeck();
     public  MahJongModel(MahJongBoard board){
         this.board = board;
-        //Tile test = new CharacterTile('5');
 
     }
-    
+    //mouselistener needs to be here somewhere tile.setMouseListener(this);
     public void positionTile(Tile t, int row, int col, int layer){
         //TODO
         //deck.deal();
