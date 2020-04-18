@@ -20,11 +20,12 @@ public class MahJongBoard extends JPanel implements MouseListener  {
     //design the game window here
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        //model.getTile(0,0,0);
-        for(int i = 0; i < 8; i++){
-            for(int j = 0; j < 14 ; j++){
-                for(int k = 0; k < 3; k++){
-                    model.getTile(i,j,k);
+        //add(model.test());
+        //model.getTile(0,1,0);
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 15 ; j++){
+                for(int k = 0; k < 4; k++){
+                    if(model.getTile(i,j,k)!=null)add(model.getTile(i,j,k));
                 }
             }
         }

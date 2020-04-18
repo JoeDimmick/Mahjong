@@ -9,7 +9,6 @@ public class MahJong extends JFrame {
     public  MahJong() {
         board = new MahJongBoard(this);
 
-
         setPreferredSize(dim);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("MahJong");
