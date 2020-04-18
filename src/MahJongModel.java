@@ -14,15 +14,33 @@ public class MahJongModel {
     public  MahJongModel(MahJongBoard board){
 
         this.board = board;
+        deck.shuffle();
 
-        //middle section of the game from (
-        for(int i = 0; i < row-2 ; i++){
-            for(int j = 3; j < col-4 ; j++){
-                for(int k = 1; k < layer-1; k++){
-                    positionTile(deck.deal(), i, j, k);
-                }
+        //top layer just under the top tile
+        for(int i = 3; i < 5; i++){
+            for(int j = 6; j < 8 ; j++){
+                    positionTile(deck.deal(), i, j, 3);
             }
         }
+
+        for(int i = 2; i < 6; i++){
+            for(int j = 5; j < 9 ; j++){
+                positionTile(deck.deal(), i, j, 2);
+            }
+        }
+
+        for(int i = 1; i < 7; i++){
+            for(int j = 4; j < 10 ; j++){
+                positionTile(deck.deal(), i, j, 1);
+            }
+        }
+
+        for(int i = 0; i < 8; i++){
+            for(int j = 3; j < 11 ; j++){
+                positionTile(deck.deal(), i, j, 0);
+            }
+        }
+
 
         //top row
         positionTile(deck.deal(), 0, 1,0);
@@ -30,6 +48,8 @@ public class MahJongModel {
         positionTile(deck.deal(), 0, 11,0);
         positionTile(deck.deal(), 0, 12,0);
 
+        positionTile(deck.deal(),2,2,0);
+        positionTile(deck.deal(),2,11,0);
         positionTile(deck.deal(),2,2,0);
         positionTile(deck.deal(),2,11,0);
 
@@ -43,8 +63,10 @@ public class MahJongModel {
         positionTile(deck.deal(),4,11,0);
         positionTile(deck.deal(),4,12,0);
 
-        positionTile(deck.deal(),2,2,0);
-        positionTile(deck.deal(),2,11,0);
+        positionTile(deck.deal(), 7, 1,0);
+        positionTile(deck.deal(), 7, 2,0);
+        positionTile(deck.deal(), 7, 11,0);
+        positionTile(deck.deal(), 7, 12,0);
 
         //row 8 is the special case tiles on the right and left
         positionTile(deck.deal(),8,0,0);
