@@ -2,13 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MahJong extends JFrame {
-    private static Dimension dim = new Dimension(1152, 720); //576 x 360 = center
+
+    private static Dimension dim = new Dimension(1160, 760); //576 x 360 = center
     private MahJongBoard board;
 
     //design the frame holding the game window here
     public  MahJong() {
-        board = new MahJongBoard(this);
 
+        board = new MahJongBoard(this);
         setPreferredSize(dim);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("MahJong");
@@ -21,6 +22,7 @@ public class MahJong extends JFrame {
 
         pack();
         setVisible(true);
+
     }
 
     //this main method will run the game.
