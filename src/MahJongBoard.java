@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.URL;
+import java.util.ArrayList;
 
 //set mouse listener call
 public class MahJongBoard extends JPanel implements MouseListener {
@@ -13,8 +14,11 @@ public class MahJongBoard extends JPanel implements MouseListener {
     private Image backgroundImage = new ImageIcon(url).getImage();
     private Dimension imageDim;
     private Dimension boardDim;
+    private ArrayList<Tile> discardedTiles = new ArrayList<> ( 144 );
+    private Tile temp;
 
     public MahJongBoard(MahJong game){
+        temp = null;
         this.game = game;
         model = new MahJongModel(this);
         setLayout(null);
@@ -100,18 +104,36 @@ public class MahJongBoard extends JPanel implements MouseListener {
 
     }
 
+    private void discardTiles(Tile t1, Tile t2){
+        discardedTiles.add ( t1 );
+        discardedTiles.add ( t2 );
+        remove(t1);
+        remove(t2);
+        temp = null;
+        repaint (  );
+    }
+
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
 
     }
 
+//    remove(tile);
+//    repaint();
     @Override
     public void mousePressed(MouseEvent mouseEvent) {
         Tile tile = (Tile) mouseEvent.getSource();
         if (mouseEvent.getButton() == MouseEvent.BUTTON1) {
-            remove(tile);
-            repaint();
-        }
+
+            System.out.println(model.isTileOpen ( tile ));
+
+//            if((temp != null && tile.matches ( temp )) ){
+//            discardTiles(temp, tile);
+//        }else{
+//            temp = tile;
+//        }
+    }
+
     }
 
     @Override

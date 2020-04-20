@@ -40,6 +40,7 @@ public class Tile extends JPanel {
         gpBoarder = new GradientPaint(6,66, ltGreen,6,6, drkGreen );
 
     }
+
     public Tile(){
 
         setPreferredSize(size);

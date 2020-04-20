@@ -78,7 +78,7 @@ public class MahJongModel {
         //top tile special case tile
         positionTopTile(deck.deal(),0,0,4);
     }
-    
+
     private void positionTile(Tile t, int row, int col, int layer){
         int x = ( (col * (t.getWidth ()-12) + layer * 12) + 30);
         int y = ( (row * (t.getHeight ()-12) - layer * 12) + 30);
@@ -116,15 +116,30 @@ public class MahJongModel {
 //    My implementation assumes that the bottom (irregular) layer is labeled as layer 0,
 //    which means that the top (single tile) layer is number 4.
 //    This method also assumes that the 3D structure has its origin (0,0) in the upper left-hand corner. -Delroy
-//    public boolean isTileOpen(Tile t){
-//
-//            if (x == 0 || x == 14 || z == 4)
-//                return true;
-//
-//            return tiles[z + 1] == null &&
-//                    (tiles[x - 1, y, z] == null || tiles[x + 1, y, z] == null);
-//
+    public boolean isTileOpen(Tile t){
+        int x = t.getXPos ();
+        int y = t.getYPos ();
+        int z = t.getZPos ();
+        boolean open = false;
+
+        System.out.printf("Tile : %s \n" +
+                "Tile x position %d\n" +
+                "Tile y position %d \n" +
+                "Tile z position %d\n", t.toString (), t.getXPos (),t.getYPos (), t.getZPos ());
+
+//        if(x == 0||x == 14 || z == 4) open = true;
+//        if(tiles[x][y][z+1] == null &&
+//                (tiles[x - 1][ y][ z] == null || tiles[x + 1][ y][ z] == null)){
+//                    open = true;
 //        }
+
+        return open;
+
+//        if (x == 0 || x == 14 || z == 4) return true;
+//
+//        return tiles[x][y][z + 1] == null &&
+//                (tiles[x - 1][ y][ z] == null || tiles[x + 1][ y][ z] == null);
+    }
 
     public Tile getTile(int row, int col, int layer){
         return tiles[row][col][layer];

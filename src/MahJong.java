@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class MahJong extends JFrame {
 
-    private static Dimension dim = new Dimension(1160, 760); //576 x 360 = center
+    private static Dimension dim = new Dimension(1000, 720); //576 x 360 = center
     private MahJongBoard board;
 
     //design the frame holding the game window here
