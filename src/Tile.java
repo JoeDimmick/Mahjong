@@ -14,9 +14,10 @@ public class Tile extends JPanel {
     protected static GradientPaint gpSide;
     protected static GradientPaint gpBoarder;
     protected static Font font;
-    protected static int xPos;
-    protected static int yPos;
-    protected static int zPos;
+    private int xPos;
+    private int yPos;
+    private int zPos;
+    private boolean isHighLighted = false;
 
     static{
 
@@ -49,6 +50,15 @@ public class Tile extends JPanel {
 
     }
 
+    public void highLightTile(boolean b){
+        isHighLighted = b;
+        repaint();
+    }
+
+    public boolean isHighLighted(){
+        return isHighLighted;
+    }
+
     public boolean matches(Tile other) {
 
         if (this == other) return false;
@@ -62,12 +72,15 @@ public class Tile extends JPanel {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D)g;
         graphics2D.setPaint(gpRect);
+        if(isHighLighted)graphics2D.setPaint(Color.yellow);
         g.fillRect(12,0,60,60);
         graphics2D.setPaint(gpSide);
+        if(isHighLighted)graphics2D.setPaint(Color.yellow);
         graphics2D.fillPolygon(side);
         graphics2D.setPaint(gpBoarder);
         graphics2D.fillPolygon(boarder);
         g.setColor(Color.BLACK);
+        if(isHighLighted) g.setColor(Color.RED);
         g.drawRect(12,0,60,60);
         g.drawPolygon(side);
         g.drawPolygon(boarder);
@@ -75,16 +88,10 @@ public class Tile extends JPanel {
 
     }
 
-    public void setXPos(int xPos){
-        this.xPos = xPos;
-    }
-
-    public void setYPos(int yPos){
-        this.yPos = yPos;
-    }
-
-    public void setZPos(int zPos){
-        this.zPos = zPos;
+    public void setXYZ(int x, int y, int z){
+        this.xPos = x;
+        this.yPos = y;
+        this.zPos = z;
     }
 
     public int getXPos(){
@@ -114,5 +121,4 @@ public class Tile extends JPanel {
         frame.setVisible(true);
 
     }
-
 }//Tile

@@ -1,7 +1,3 @@
-import javafx.geometry.Point2D;
-
-import java.awt.*;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class MahJongModel {
@@ -10,6 +6,7 @@ public class MahJongModel {
     private int layer = 4;
     private MahJongBoard board;
     protected Tile[][][] tiles = new Tile[row+1][col+1][layer+1];
+    private ArrayList<Tile> discardedT = new ArrayList<>();
     private TileDeck deck = new TileDeck();
 
     public  MahJongModel(MahJongBoard board){
@@ -77,76 +74,74 @@ public class MahJongModel {
 
         //top tile special case tile
         positionTopTile(deck.deal(),0,0,4);
-    }
 
+        //System.out.println("MahJongModel()");
+    }
+    
     private void positionTile(Tile t, int row, int col, int layer){
         int x = ( (col * (t.getWidth ()-12) + layer * 12) + 30);
         int y = ( (row * (t.getHeight ()-12) - layer * 12) + 30);
-        //int offset= ;
         tiles[row][col][layer] = t;
-        t.setXPos ( row );
-        t.setXPos ( col );
-        t.setZPos ( layer );
         t.setLocation ( x, y );
+        tiles[row][col][layer].setXYZ(row, col, layer);
     }
 
     private void positionTopTile(Tile t, int row, int col, int layer){
         int x = ( ((7 * (t.getWidth ()-12)) + 20) + 30 );
         int y = ( ((2 * (t.getHeight ()-12)) + (layer * 12)) + 30);
         tiles[row][col][layer] = t;
-        t.setXPos ( row );
-        t.setXPos ( col );
-        t.setZPos ( layer );
         t.setLocation(x,y);
+        tiles[row][col][layer].setXYZ(row, col, layer);
     }
 
     private void positionSpecialTile(Tile t, int row, int col, int layer){
         int x = ( (col * (t.getWidth ()-12) + layer * 12) + 30);
         int y = ( (4 * (t.getHeight ()-12)) + layer * 12);
         tiles[row][col][layer] = t;
-        t.setXPos ( row );
-        t.setXPos ( col );
-        t.setZPos ( layer );
         t.setLocation(x,y);
+        tiles[row][col][layer].setXYZ(row, col, layer);
     }
 
-//    The x, y, and z variables appearing in the method are the location of the tile in a logical,
-//    3D data structure (the model or MahJongModel in the Lab 6 UML diagram).
-//    The constant values, 0, 14, and 4, depend on how you organize your tiles.
-//    My implementation assumes that the bottom (irregular) layer is labeled as layer 0,
-//    which means that the top (single tile) layer is number 4.
-//    This method also assumes that the 3D structure has its origin (0,0) in the upper left-hand corner. -Delroy
+    public void discardTile(Tile t){
+        tiles[t.getXPos()][t.getYPos()][t.getZPos()] = null;
+        discardedT.add(t);
+        // int x = (5 + (discardedT.get(0).getWidth()/2));
+        //int y = (16 * (discardedT.get(0).getHeight()));;
+       System.out.printf("\ndiscardTiles() %d\n" +
+               "location %d : %d\n", discardedT.size(), t.getX(), t.getY());
+    }
+
     public boolean isTileOpen(Tile t){
-        int x = t.getXPos ();
-        int y = t.getYPos ();
-        int z = t.getZPos ();
-        boolean open = false;
+        int x = t.getXPos();
+        int y = t.getYPos();
+        int z = t.getZPos();
 
-        System.out.printf("Tile : %s \n" +
-                "Tile x position %d\n" +
-                "Tile y position %d \n" +
-                "Tile z position %d\n", t.toString (), t.getXPos (),t.getYPos (), t.getZPos ());
-
-//        if(x == 0||x == 14 || z == 4) open = true;
-//        if(tiles[x][y][z+1] == null &&
-//                (tiles[x - 1][ y][ z] == null || tiles[x + 1][ y][ z] == null)){
-//                    open = true;
-//        }
-
-        return open;
-
-//        if (x == 0 || x == 14 || z == 4) return true;
-//
-//        return tiles[x][y][z + 1] == null &&
-//                (tiles[x - 1][ y][ z] == null || tiles[x + 1][ y][ z] == null);
+        if(y == 0 || y == 14 || z == 4) return true;
+        if(z == 3 && (tiles[0][0][4] != null))return false;
+        if(((x == 3 || x == 4) && y == 12) && tiles[8][13][0]!=null)return false;
+        if((y == 1 && (x == 3 || x ==4)) && tiles [8][0][0]!=null)return false;
+        if((x == 8 && y == 13) && tiles[8][14][0]!=null)return false;
+        return tiles[x][y][z+1] == null &&
+                (tiles [x][y - 1][z] == null || tiles[x][y+1][z] == null);
     }
 
     public Tile getTile(int row, int col, int layer){
         return tiles[row][col][layer];
     }
 
-    public Tile test(){
-        return deck.deal();
+    public Tile getDiscardedTile(){
+        int size = discardedT.size();
+        int x = 10;
+        int y = 1080;
+        for(Tile t : discardedT){
+            t.setLocation(x,y);
+        }
+        System.out.printf("\ngetDiscardedTile() %s\n" +
+                        "Location %d : %d ",
+                discardedT.get(size-1),
+                discardedT.get(size-1).getX(),
+                discardedT.get(size-1).getX());
+        return discardedT.get(size-1);
     }
-    
+
 }
