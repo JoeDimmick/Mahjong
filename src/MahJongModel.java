@@ -107,8 +107,8 @@ public class MahJongModel {
         discardedT.add(t);
         // int x = (5 + (discardedT.get(0).getWidth()/2));
         //int y = (16 * (discardedT.get(0).getHeight()));;
-       System.out.printf("\ndiscardTiles() %d\n" +
-               "location %d : %d\n", discardedT.size(), t.getX(), t.getY());
+//       System.out.printf("\ndiscardTiles() %d\n" +
+//               "location %d : %d\n", discardedT.size(), t.getX(), t.getY());
     }
 
     public boolean isTileOpen(Tile t){
@@ -133,14 +133,14 @@ public class MahJongModel {
         int size = discardedT.size();
         int x = 10;
         int y = 1080;
-        for(Tile t : discardedT){
-            t.setLocation(x,y);
+        for(int i = 0; i < discardedT.size (); i++){
+            discardedT.get ( i ).setLocation ( x, y );
         }
-        System.out.printf("\ngetDiscardedTile() %s\n" +
-                        "Location %d : %d ",
-                discardedT.get(size-1),
-                discardedT.get(size-1).getX(),
-                discardedT.get(size-1).getX());
+//        System.out.printf("\ngetDiscardedTile() %s\n" +
+//                        "Location %d : %d ",
+//                discardedT.get(size-1),
+//                discardedT.get(size-1).getX(),
+//                discardedT.get(size-1).getY());
         return discardedT.get(size-1);
     }
 

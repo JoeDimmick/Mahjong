@@ -11,6 +11,7 @@ public class MahJongBoard extends JPanel implements MouseListener {
     private MahJong game;
     private MahJongModel model;
     private URL url = getClass().getResource("images/dragon_bg.png");
+    private PlayClip clip = new PlayClip("audio/stone-scraping.wav", true);
     private Image backgroundImage = new ImageIcon(url).getImage();
     private Dimension imageDim;
     private Dimension boardDim;
@@ -90,6 +91,8 @@ public class MahJongBoard extends JPanel implements MouseListener {
         add(model.getTile(8, 13, 0));
         add(model.getTile(8, 14, 0));
 
+
+
         //System.out.println("MahJongBoard()");
     }
 
@@ -109,7 +112,7 @@ public class MahJongBoard extends JPanel implements MouseListener {
         model.discardTile(t2);
 //        remove(t1);
 //        remove(t2);
-        add(model.getDiscardedTile());
+        add(model.getDiscardedTile ());
         repaint();
         temp = null;
     }
@@ -127,15 +130,16 @@ public class MahJongBoard extends JPanel implements MouseListener {
             if (temp == null) {
                 temp = tile;
                 temp.highLightTile(true);
-                System.out.printf("%s has been been selected\n", tile.toString());
+                //System.out.printf("%s has been been selected\n", tile.toString());
             } else if ((tile.matches(temp)) &&
                     (model.isTileOpen(temp) && model.isTileOpen(tile))) {
-                System.out.println("Tiles matched");
+                clip.play ();
                 discardTiles(temp, tile);
+                //System.out.println("Tiles matched");
             } else {
                 temp.highLightTile(false);
                 temp = null;
-                System.out.println("tiles did not match");
+                //System.out.println("tiles did not match");
             }
 
         }

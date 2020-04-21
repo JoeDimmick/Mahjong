@@ -6,7 +6,9 @@ abstract public class RankTile extends Tile {
     }
 
     public boolean matches(Tile other) {
-        return super.matches ( other ) && rank == ((RankTile) other).rank;
+        //System.out.printf(" " + this.getClass().getSuperclass () + " " + other.getClass().getSuperclass ());
+        //System.out.printf("\nRank Tile %s : %s " + super.matches ( other ), this.toString (), other.toString ());
+        return super.matches ( other ) && this.rank == ((RankTile) other).rank;
     }
 }
 

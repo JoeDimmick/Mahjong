@@ -63,7 +63,7 @@ public class Tile extends JPanel {
 
         if (this == other) return false;
         if (other == null) return false;
-        return getClass ( ) == other.getClass ( );
+        return getClass ( ).getSuperclass () == other.getClass ( ).getSuperclass ();
 
     }
 
